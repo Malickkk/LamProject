@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1>HOME PAGE</h1>
+
+<a class="btn-btn-primary" href="{% url 'makeTeam' %}">Enregistrer une équipe</a><br>
+<a class="btn-btn-primary" href="{% url 'standings' %}">Classement</a>
+
+<div>
+    <table>
+        <caption>Équipes et Joueurs</caption>
+            {% for team in teams %}
+            <tr>
+                <th>{{ team }} </th>
+                {% for player in players %}
+                    {% if player.team_id == team.id %}
+                        <td>{{ player }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+
+<div>
+    {% for group in team_groups %}
+    <table>
+        <caption>{{group}}</caption>
+        <th>Équipes</th>
+        <th>MJ</th>
+        <th>V</th>
+        <th>N</th>
+        <th>D</th>
+        <th>BM</th>
+        <th>BE</th>
+        <th>DB</th>
+        <th>PTs</th>
+        {% for equipe in group.teams.all %}
+        <tr>
+        <td>{{ equipe }}</td>
+        <td>{{ equipe.match_played }}</td>
+        <td>{{ equipe.won }}</td>
+        <td>{{ equipe.draw }}</td>
+        <td>{{ equipe.lost }}</td>
+        <td>{{ equipe.goal_for }}</td>
+        <td>{{ equipe.goal_against }}</td>
+        <td>{{ equipe.goal_diff }}</td>
+        <td>{{ equipe.points }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}  
+</div>
+
+{% endblock %} 

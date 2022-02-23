@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %} 
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link href="{% static 'assets/css/login.css' %}" rel="stylesheet" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6 mx-auto p-0">
+        <div class="card">
+            <div class="login-box">
+                <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Connexion</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">S'enregistrer</label>
+                    <div class="login-space">
+                        <form method="POST">
+                        <div class="login">
+                            <div class="group"> <label for="user" class="label">Adresse courriel</label> {{ login_form.email|add_class:"input" }} </div>
+                            <div class="group"> <label for="pass" class="label">Mot de passe</label> {{ login_form.password|add_class:"input" }} </div>
+                            <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>
+                            <div class="group"> <button type="submit" class="button" >Se Connecter</button> </div>
+                            <div class="hr"></div>
+                            <div class="foot"> <a href="#">Forgot Password?</a> </div>
+                        </div>
+                        </form>
+                        <form method="POST">
+                        <div class="sign-up-form">
+                            <div class="group"> <label for="user" class="label">Adresse courriel</label> {{ register_form.email|add_class:"input" }} </div>
+                            <div class="group"> <label for="user" class="label">Prenom & Nom</label> {{ register_form.full_name|add_class:"input" }} </div>
+                            <div class="group"> <label for="user" class="label">Date de naissance</label> {{ register_form.dob|add_class:"input" }} </div>
+                            <div class="group"> <label for="user" class="label">Pays</label> {{ register_form.country|add_class:"input" }} </div>
+                            <div class="group"> <label for="pass" class="label">Mot de passe</label> {{ register_form.password1|add_class:"input" }} </div>
+                            <div class="group"> <label for="user" class="label">Confirmer mot de passe</label> {{ register_form.password2|add_class:"input" }} </div>
+                            <div class="group"> <button type="submit" class="button" >S'enregistrer</button> </div>
+                            <div class="hr"></div>
+                            <div class="foot"> <label for="tab-1">Already Member?</label> </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
