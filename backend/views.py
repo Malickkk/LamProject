@@ -21,7 +21,7 @@ def home(request):
     return render(request, 'index.html', context)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def teams(request):
     teams = Team.objects.all()
     players = Player.objects.all()
@@ -30,7 +30,7 @@ def teams(request):
     return render(request, 'teams.html', context)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def view_team(request, id):
     team = Team.objects.filter(id=id) #obtain exact country object selected in a query list
     players = Player.objects.all().filter(country=team[0].get_country_code()).order_by('-position')
@@ -60,7 +60,7 @@ def customLoginRegister(request):
     return render(request, 'login.html', context)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def makeTeam(request):
     PlayerFormSet = formset_factory(PlayerForm, extra=25)
     formset = PlayerFormSet(request.POST or None)
@@ -98,7 +98,7 @@ def makeTeam(request):
     return render(request, 'makeTeam.html', context)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def match(request):
     groups=[]
     for group in TeamGroup.objects.all():
@@ -108,7 +108,7 @@ def match(request):
     return render(request, 'match.html', context)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def standings(request):
     team_groups = TeamGroup.objects.all()
     context = { 'team_groups' : team_groups }
