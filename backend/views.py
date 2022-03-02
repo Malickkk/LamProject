@@ -33,7 +33,7 @@ def teams(request):
 @login_required(login_url='/login')
 def view_team(request, id):
     team = Team.objects.filter(id=id) #obtain exact country object selected in a query list
-    players = Player.objects.all().filter(country=team[0].get_country_code()).order_by('-position')
+    players = Player.objects.all().filter(country=team[0].get_country_code())
     #obtain all players from selected country using the country code which matches DB
     context = {'team': team, 'players': players}
     return render(request, 'view_team.html', context)
@@ -128,5 +128,7 @@ def matchSetUp():
     matches=[]
     for group in groups:
         matches.append([i for i in combinations(group,2)])
+    for match in matches:
+        shuffle(match)
  
     return matches

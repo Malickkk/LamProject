@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -109,13 +109,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
  
-        'NAME': 'd7socreotdiiv8',
+        'NAME': 'd2m5onjci6pmf7',
 
-        'USER': 'hhfdxvpyewabmt',
+        'USER': 'pfpwnuybiwmdkp',
 
-        'PASSWORD': '21e52264fa1d699402f2566321ce5355f2a49875c454e1787045fdcfd546dbf1',
+        'PASSWORD': 'b74f9c2a3129ea44af9ccf7fcad9743d66d2aae8aa33ae0dea09b7dc27e53424',
 
-        'HOST': 'ec2-3-227-195-74.compute-1.amazonaws.com',
+        'HOST': 'ec2-3-230-238-86.compute-1.amazonaws.com',
 
         'PORT': '5432',
 
@@ -163,7 +163,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates'),
 ]
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'

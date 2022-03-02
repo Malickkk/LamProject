@@ -958,7 +958,7 @@
      float: left;
      width: 100%;
      min-height: 500px;
-     background-image: url('../images/about.png');
+     background-image: url('../images/lam_pic4.jpeg');
      background-position: center center;
      background-repeat: no-repeat;
      background-size: cover;
@@ -1178,7 +1178,7 @@ section#contant h4 {
  .theme-padding.middle-bg {
      padding-top: 100px;
      padding-bottom: 100px;
-     background-image: url(../images/sport-mate.png);
+     background-image: url(../images/lam_logo.jpeg);
      background-repeat: no-repeat;
      background-position: top center;
      position: relative;
@@ -2020,7 +2020,7 @@ body section#contant .post-info span h4 {
      .theme-padding.middle-bg {
          padding-top: 60px;
          padding-bottom: 60px;
-         background-image: url(../images/sport-mate.png);
+         background-image: url(../images/lam_logo.jpeg);
          background-repeat: no-repeat;
          background-position: top center;
          position: relative;

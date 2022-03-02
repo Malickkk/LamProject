@@ -2,10 +2,10 @@
 {% block title %}Home{% endblock %}
 {% load static %}
 {% block content %}
-<div class="inner-page-banner">
+<!-- <div class="inner-page-banner">
    <div class="container">
    </div>
-</div>
+</div> -->
 <div class="inner-information-text">
    <div class="container">
       <h3>Les Équipes</h3>
@@ -23,7 +23,7 @@
          <a href="{% url 'view_team' team.id %}">
             <div class="col-md-3 column">
                <div class="card">
-                  <img class="img-responsive" src="{{ team.get_flag }}" alt="John" style="width:100%">
+                  <!-- <img class="img-responsive" src="{{ team.get_flag }}" alt="John" style="width:100%"> -->
                   <div class="">
                    <h4>{{ team }}</h4>
                   </div>
