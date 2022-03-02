@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_on_heroku
+from django.core.management.utils import get_random_secret_key
+import sys
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p_6(=_79@)idoahqa3#3#+kkm8h-lc%bz&_q#s$f&pv6)t82q1'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['lamproject.herokuapp.com']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -103,25 +105,41 @@ WSGI_APPLICATION = 'Lamproject.wsgi.application'
 #     }
 # }
 
-DATABASES = {
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
- 
-        'NAME': 'd2m5onjci6pmf7',
-
-        'USER': 'pfpwnuybiwmdkp',
-
-        'PASSWORD': 'b74f9c2a3129ea44af9ccf7fcad9743d66d2aae8aa33ae0dea09b7dc27e53424',
-
-        'HOST': 'ec2-3-230-238-86.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
-}
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ 
+#         'NAME': 'd2m5onjci6pmf7',
+
+#         'USER': 'pfpwnuybiwmdkp',
+
+#         'PASSWORD': 'b74f9c2a3129ea44af9ccf7fcad9743d66d2aae8aa33ae0dea09b7dc27e53424',
+
+#         'HOST': 'ec2-3-230-238-86.compute-1.amazonaws.com',
+
+#         'PORT': '5432',
+
+#     }
+
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -160,10 +178,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'templates'),
-]
-django_on_heroku.settings(locals())
+STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates"),)
+
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
