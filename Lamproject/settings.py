@@ -115,11 +115,25 @@ if DEVELOPMENT_MODE is True:
         }
     }
 else :
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ 
+        'NAME': 'd2m5onjci6pmf7',
+
+        'USER': 'pfpwnuybiwmdkp',
+
+        'PASSWORD': 'b74f9c2a3129ea44af9ccf7fcad9743d66d2aae8aa33ae0dea09b7dc27e53424',
+
+        'HOST': 'ec2-3-230-238-86.compute-1.amazonaws.com',
+
+        'PORT': '5432',
+
     }
+
+}
 
 # DATABASES = {
 
@@ -178,8 +192,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates"),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates"),)
 
 
 LOGIN_URL = '/login'
